@@ -1,4 +1,3 @@
-
 const HomePage = () => {
   return (
     <div className="App">
@@ -16,7 +15,7 @@ const HomePage = () => {
         </a>
       </header>
     </div>
-  );
+  )
 }
 
-export default HomePage;
+export default HomePage
