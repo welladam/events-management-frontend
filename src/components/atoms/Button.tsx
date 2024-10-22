@@ -26,7 +26,7 @@ const Button = ({
   return (
     <ButtonHeadlessUI
       className={classnames(
-        'rounded-full bg-transparent border-2 min-w-20 text-lg active:translate-y-1 active:translate-x-1',
+        'transition rounded-full bg-transparent border-2 min-w-20 text-lg active:translate-y-1 active:translate-x-1',
         ButtonColor[color],
         ButtonSize[size]
       )}
