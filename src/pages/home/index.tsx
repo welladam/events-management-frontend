@@ -1,7 +1,9 @@
+import { Layout } from 'src/components/organisms'
+
 const HomePage = () => {
   return (
-    <div className="App">
-      <header className="App-header">
+    <Layout>
+      <div>
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -13,8 +15,8 @@ const HomePage = () => {
         >
           Learn React
         </a>
-      </header>
-    </div>
+      </div>
+    </Layout>
   )
 }
 
