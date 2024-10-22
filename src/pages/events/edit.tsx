@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react'
 import { Layout } from 'src/components/organisms'
 import { FormData } from 'src/components/templates'
@@ -5,7 +6,7 @@ import { updateEvent, deleteEvent, getEventById } from 'src/api/eventsApi'
 import { Event, EventRequest } from 'src/types/eventType'
 import { useNavigate, useParams } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import { Loader } from 'src/components'
+import FormDataSkeleton from 'src/components/templates/FormDataSkeleton'
 
 const EditEventPage = () => {
   const { id } = useParams<{ id: string }>()
@@ -63,12 +64,26 @@ const EditEventPage = () => {
     }
   }
 
-  return (
-    <Layout>
+  const EmptyState = () => {
+    return (
+      <div className="flex flex-col w-full h-full justify-center items-center">
+        <img
+          src={require('src/assets/empty-state-events.png')}
+          className="w-[500px] opacity-75"
+        />
+        <span className="text-gray-500 font-extralight text-xl">
+          Oops, event not found!
+        </span>
+      </div>
+    )
+  }
+
+  const EditFormData = () => {
+    return (
       <div className="flex flex-col gap-8 py-10">
         <h1>Update Event</h1>
         {loading ? (
-          <Loader />
+          <FormDataSkeleton />
         ) : (
           <FormData
             event={event}
@@ -80,6 +95,12 @@ const EditEventPage = () => {
           />
         )}
       </div>
+    )
+  }
+
+  return (
+    <Layout showBackButton>
+      {!loading && !event ? <EmptyState /> : <EditFormData />}
     </Layout>
   )
 }

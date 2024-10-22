@@ -54,7 +54,9 @@ const UploadCard = ({ onFileUpload, previewUrl }: FileUploadProps) => {
         text-transparent hover:text-white cursor-pointer"
           onClick={() => setPreview('')}
         >
-          <p className="text-xl font-bold">Click here to remove the image!</p>
+          <span className="text-xl font-bold">
+            Click here to remove the image!
+          </span>
         </div>
         <img src={preview} className="max-h-60 w-full object-cover" />
       </div>
@@ -65,10 +67,10 @@ const UploadCard = ({ onFileUpload, previewUrl }: FileUploadProps) => {
     return (
       <div className="flex flex-col items-center justify-center">
         <CloudIcon className="w-10 h-10 text-gray-400 mb-4" />
-        <p className="text-lg font-semibold">
+        <span className="text-lg font-semibold">
           Choose an image or drag & drop it here
-        </p>
-        <p className="text-gray-500 mb-4">Only image formats, up to 6MB</p>
+        </span>
+        <span className="text-gray-500 mb-4">Only image formats!</span>
         <label
           className="transition rounded-full bg-transparent border-2 min-w-20 text-lg active:translate-y-1 active:translate-x-1
     px-4 py-2 cursor-pointer border-primary text-primary hover:bg-primary hover:text-white"

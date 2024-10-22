@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react'
 import { Layout } from 'src/components/organisms'
 import { FormData } from 'src/components/templates'
@@ -24,7 +25,7 @@ const CreateEventPage = () => {
   }
 
   return (
-    <Layout>
+    <Layout showBackButton>
       <div className="flex flex-col gap-8 py-10">
         <h1>Create new Event</h1>
         <FormData
