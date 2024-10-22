@@ -8,10 +8,6 @@ yarn-error.log*
 build/
 dist/
 
-# Tailwind CSS configuration
-tailwind.config.js
-tailwind.config.ts
-
 # Cache directories
 .cache/
 .parcel-cache/
