@@ -36,12 +36,12 @@ const Card = ({ event }: CardProps) => {
             </div>
           )}
         </div>
-        <div className="flex flex-col gap-2">
-          <p className="text-xl font-semibold leading-none line-clamp-2 overflow-ellipsis">
+        <div className="flex flex-col gap-4">
+          <p className="text-xl font-semibold leading-6 line-clamp-2 overflow-ellipsis">
             {event.title}
           </p>
           {event.description && (
-            <p className="text-lg text-gray-500 line-clamp-2 overflow-ellipsis">
+            <p className="text-lg text-gray-500 leading-5 line-clamp-2 overflow-ellipsis">
               {event.description}
             </p>
           )}

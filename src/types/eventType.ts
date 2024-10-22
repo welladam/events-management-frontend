@@ -9,10 +9,11 @@ export interface Event {
   imageUrl?: string
 }
 
-export interface NewEvent {
+export interface EventRequest {
   title: string
+  description?: string
   startDate: string
   endDate: string
-  price: number
-  status: string
+  price?: string
+  status?: string
 }
