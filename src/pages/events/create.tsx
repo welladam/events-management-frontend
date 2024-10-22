@@ -3,16 +3,21 @@ import { Layout } from 'src/components/organisms'
 import { FormData } from 'src/components/templates'
 import { createEvent } from 'src/api/eventsApi'
 import { EventRequest } from 'src/types/eventType'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 const CreateEventPage = () => {
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
-  const postCreateNewEvent = async (event: EventRequest, image?: File) => {
+
+  const handleCreateNewEvent = async (event: EventRequest, image?: File) => {
     try {
       setLoading(true)
       await createEvent(event, image)
-      //TODO: Add success message
-    } catch (error) {
-      console.log('error getAllEvents', error)
+      toast.success('Event has been created successfully!')
+      navigate('/')
+    } catch (error: any) {
+      toast.error(`Ops, something went wrong! Error: ${error.response.data}`)
     } finally {
       setLoading(false)
     }
@@ -24,7 +29,7 @@ const CreateEventPage = () => {
         <h1>Create new Event</h1>
         <FormData
           submitButtonLabel="Create new Event"
-          onSubmitForm={(data, image) => postCreateNewEvent(data, image)}
+          onSubmitForm={handleCreateNewEvent}
           loadingSubmit={loading}
         />
       </div>

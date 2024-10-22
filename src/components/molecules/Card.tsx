@@ -12,7 +12,7 @@ const Card = ({ event }: CardProps) => {
     <Link
       className="flex flex-col transition drop-shadow-sm hover:drop-shadow-md active:translate-x-1 active:translate-y-1 
     rounded-3xl w-full lg:w-[400px] 2xl:w-[440px] bg-white cursor-pointer"
-      to={`/events`}
+      to={`/events/update/${event.id}`}
     >
       <img
         src={event.imageUrl}

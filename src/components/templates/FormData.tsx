@@ -3,6 +3,7 @@ import { UploadCard, TextInput, SelectInput } from 'src/components/molecules'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useState } from 'react'
 import { Event, EventRequest } from 'src/types/eventType'
+import { convertToDateString } from 'src/helpers/dateHelper'
 
 const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/
 const numberPattern = /^\d{1,4}$/
@@ -39,8 +40,8 @@ const FormData = ({
     defaultValues: {
       title: event?.title,
       description: event?.description,
-      startDate: event?.startDate,
-      endDate: event?.endDate,
+      startDate: convertToDateString(event?.startDate),
+      endDate: convertToDateString(event?.endDate),
       price: event?.price?.toString(),
       status: event?.status,
     },
@@ -55,7 +56,7 @@ const FormData = ({
       className="flex flex-col gap-12 xl:w-3/5"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <UploadCard onFileUpload={setImage} />
+      <UploadCard previewUrl={event?.imageUrl} onFileUpload={setImage} />
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-32">
         <TextInput
           title="Title"

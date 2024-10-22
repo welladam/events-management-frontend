@@ -39,6 +39,7 @@ const Button = ({
       )}
       type={type}
       onClick={onClick}
+      disabled={loading}
     >
       {loading ? (
         <div className="min-w-20">

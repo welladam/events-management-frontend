@@ -7,7 +7,7 @@ export const getAllEvents = async (): Promise<Event[]> => {
   return response.data
 }
 
-export const getEventById = async (id: number): Promise<Event> => {
+export const getEventById = async (id: string): Promise<Event> => {
   const response = await api.get(`/events/${id}`)
   return response.data
 }
@@ -26,9 +26,9 @@ export const createEvent = async (
 }
 
 export const updateEvent = async (
-  id: number,
+  id: string,
   updatedEvent: EventRequest,
-  imageFile: File
+  imageFile?: File
 ): Promise<Event> => {
   const formData = formatEventFormData(updatedEvent, imageFile)
 
@@ -52,7 +52,10 @@ const formatEventFormData = (event: EventRequest, image?: File) => {
     startDate: convertToISO(event.startDate),
     endDate: convertToISO(event.endDate),
   }
-  new Blob([JSON.stringify(eventFormatted)], { type: 'application/json' })
+  formData.append(
+    'event',
+    new Blob([JSON.stringify(eventFormatted)], { type: 'application/json' })
+  )
   image && formData.append('file', image)
   return formData
 }

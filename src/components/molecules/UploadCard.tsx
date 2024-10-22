@@ -3,10 +3,11 @@ import { CloudIcon } from '@heroicons/react/24/outline'
 
 interface FileUploadProps {
   onFileUpload: (file: File) => void
+  previewUrl?: string
 }
 
-const UploadCard = ({ onFileUpload }: FileUploadProps) => {
-  const [preview, setPreview] = useState('')
+const UploadCard = ({ onFileUpload, previewUrl }: FileUploadProps) => {
+  const [preview, setPreview] = useState(previewUrl)
   const [isDragOver, setIsDragOver] = useState(false)
 
   const handleDragOver = (e: React.DragEvent) => {
