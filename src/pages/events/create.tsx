@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
-import { Card } from 'src/components/molecules'
+import { useState } from 'react'
 import { Layout } from 'src/components/organisms'
 import { FormData } from 'src/components/templates'
 import { createEvent } from 'src/api/eventsApi'
-import { Event, EventRequest } from 'src/types/eventType'
+import { EventRequest } from 'src/types/eventType'
 
 const CreateEventPage = () => {
   const [loading, setLoading] = useState(false)

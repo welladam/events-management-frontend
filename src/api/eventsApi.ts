@@ -1,5 +1,6 @@
-import { Event, NewEvent } from 'src/types/eventType'
+import { Event, EventRequest } from 'src/types/eventType'
 import api from './axiosConfig'
+import { convertToISO } from 'src/helpers/dateHelper'
 
 export const getAllEvents = async (): Promise<Event[]> => {
   const response = await api.get('/events')
@@ -12,17 +13,10 @@ export const getEventById = async (id: number): Promise<Event> => {
 }
 
 export const createEvent = async (
-  newEvent: NewEvent,
-  imageFile: File
+  event: EventRequest,
+  imageFile?: File
 ): Promise<void> => {
-  const formData = new FormData()
-
-  formData.append('title', newEvent.title)
-  formData.append('startDate', newEvent.startDate)
-  formData.append('endDate', newEvent.endDate)
-  formData.append('price', String(newEvent.price))
-  formData.append('status', newEvent.status)
-  formData.append('file', imageFile)
+  const formData = formatEventFormData(event, imageFile)
 
   await api.post('/events', formData, {
     headers: {
@@ -33,17 +27,10 @@ export const createEvent = async (
 
 export const updateEvent = async (
   id: number,
-  updatedEvent: NewEvent,
+  updatedEvent: EventRequest,
   imageFile: File
 ): Promise<Event> => {
-  const formData = new FormData()
-
-  formData.append('title', updatedEvent.title)
-  formData.append('startDate', updatedEvent.startDate)
-  formData.append('endDate', updatedEvent.endDate)
-  formData.append('price', String(updatedEvent.price))
-  formData.append('status', updatedEvent.status)
-  formData.append('file', imageFile)
+  const formData = formatEventFormData(updatedEvent, imageFile)
 
   const response = await api.put(`/events/${id}`, formData, {
     headers: {
@@ -56,4 +43,16 @@ export const updateEvent = async (
 
 export const deleteEvent = async (id: number): Promise<void> => {
   await api.delete(`/events/${id}`)
+}
+
+const formatEventFormData = (event: EventRequest, image?: File) => {
+  const formData = new FormData()
+  const eventFormatted = {
+    ...event,
+    startDate: convertToISO(event.startDate),
+    endDate: convertToISO(event.endDate),
+  }
+  new Blob([JSON.stringify(eventFormatted)], { type: 'application/json' })
+  image && formData.append('file', image)
+  return formData
 }
