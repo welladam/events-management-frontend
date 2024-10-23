@@ -7,6 +7,16 @@ export const getAllEvents = async (): Promise<Event[]> => {
   return response.data
 }
 
+export const getAllUpcomingEvents = async (): Promise<Event[]> => {
+  const response = await api.get('/events/upcoming')
+  return response.data
+}
+
+export const getAllPastEvents = async (): Promise<Event[]> => {
+  const response = await api.get('/events/past')
+  return response.data
+}
+
 export const getEventById = async (id: string): Promise<Event> => {
   const response = await api.get(`/events/${id}`)
   return response.data

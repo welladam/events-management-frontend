@@ -1,20 +1,23 @@
 import { useEffect, useState } from 'react'
 import { Card, CardSkeleton } from 'src/components/molecules'
 import { Layout } from 'src/components/organisms'
-import { getAllEvents } from 'src/api/eventsApi'
+import { getAllUpcomingEvents, getAllPastEvents } from 'src/api/eventsApi'
 import { Event } from 'src/types/eventType'
 import toast from 'react-hot-toast'
 
 const HomePage = () => {
   const [loading, setLoading] = useState(false)
-  const [events, setEvents] = useState<Event[]>([])
+  const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([])
+  const [pastEvents, setPastEvents] = useState<Event[]>([])
 
   useEffect(() => {
-    const fetchEvent = async () => {
+    const fetchEvents = async () => {
       try {
         setLoading(true)
-        const eventsData = await getAllEvents()
-        setEvents(eventsData)
+        const upcomingEventsData = await getAllUpcomingEvents()
+        const pastEventsData = await getAllPastEvents()
+        setUpcomingEvents(upcomingEventsData)
+        setPastEvents(pastEventsData)
       } catch (error) {
         toast.error(`Ops, something went wrong! Error: ${error}`)
       } finally {
@@ -22,10 +25,10 @@ const HomePage = () => {
       }
     }
 
-    fetchEvent()
+    fetchEvents()
   }, [])
 
-  const EventList = () => {
+  const EventList = ({ events }: { events: Event[] }) => {
     if (events.length <= 0) {
       return (
         <div className="flex flex-col w-full h-full justify-center items-center">
@@ -63,7 +66,9 @@ const HomePage = () => {
     <Layout>
       <div className="flex flex-col gap-8 py-10">
         <h1>Upcoming Events</h1>
-        {loading ? <SkeletonList /> : <EventList />}
+        {loading ? <SkeletonList /> : <EventList events={upcomingEvents} />}
+        <h1>Past Events</h1>
+        {loading ? <SkeletonList /> : <EventList events={pastEvents} />}
       </div>
     </Layout>
   )
