@@ -9,7 +9,13 @@ const Header = () => {
         <Link to="/">
           <img src={require('src/assets/logo.png')} />
         </Link>
-        <div>
+        <div className="flex items-center gap-4">
+          <Link
+            to="/events"
+            className="transition-all text-lg text-secondary rounded-3xl hover:bg-secondary hover:text-black px-4"
+          >
+            All Events
+          </Link>
           <Button
             size="small"
             color="secondary"

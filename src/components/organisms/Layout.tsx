@@ -1,5 +1,5 @@
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
-import { Header } from '../organisms'
+import { Header, Footer } from '../organisms'
 import { useNavigate } from 'react-router-dom'
 
 interface LayoutProps {
@@ -10,9 +10,9 @@ interface LayoutProps {
 const Layout = ({ showBackButton, children }: LayoutProps) => {
   const navigate = useNavigate()
   return (
-    <div className="flex flex-col min-h-screen w-screen">
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow responsive-padding bg-background">
+      <main className="flex-grow responsive-padding bg-background pb-12">
         {showBackButton && (
           <ArrowLeftIcon
             className="transition-all w-8 h-8 cursor-pointer mt-8 hover:stroke-primary"
@@ -21,6 +21,7 @@ const Layout = ({ showBackButton, children }: LayoutProps) => {
         )}
         {children}
       </main>
+      <Footer />
     </div>
   )
 }

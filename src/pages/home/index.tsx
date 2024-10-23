@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Card, CardSkeleton } from 'src/components/molecules'
+import { Banner, Card, CardSkeleton } from 'src/components/molecules'
 import { Layout } from 'src/components/organisms'
 import { getAllUpcomingEvents, getAllPastEvents } from 'src/api/eventsApi'
 import { Event } from 'src/types/eventType'
@@ -65,9 +65,15 @@ const HomePage = () => {
   return (
     <Layout>
       <div className="flex flex-col gap-8 py-10">
+        {upcomingEvents.length > 0 && (
+          <div className="flex flex-col gap-8 my-20">
+            <h1>Today&apos;s Event</h1>
+            <Banner event={upcomingEvents[0]} />
+          </div>
+        )}
         <h1>Upcoming Events</h1>
         {loading ? <SkeletonList /> : <EventList events={upcomingEvents} />}
-        <h1>Past Events</h1>
+        <h1 className="mt-12">Past Events</h1>
         {loading ? <SkeletonList /> : <EventList events={pastEvents} />}
       </div>
     </Layout>

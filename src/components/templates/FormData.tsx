@@ -4,15 +4,8 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { useState } from 'react'
 import { Event, EventRequest } from 'src/types/eventType'
 import { convertToDateString } from 'src/helpers/dateHelper'
-
-const datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/
-const numberPattern = /^\d{1,4}$/
-
-const selectOptions = [
-  { value: 'started', label: 'Started' },
-  { value: 'completed', label: 'Completed' },
-  { value: 'paused', label: 'Paused' },
-]
+import { selectOptions } from 'src/utils/statusOptions'
+import { datePattern, numberPattern } from 'src/utils/regexPatterns'
 
 interface FormDataProps {
   event?: Event

@@ -1,24 +1,28 @@
 import { forwardRef, HTMLProps, Ref } from 'react'
+import classnames from 'classnames'
 import { Input } from 'src/components/atoms'
 
 interface SelectInputProps extends HTMLProps<HTMLSelectElement> {
   title: string
   error?: string
+  mode?: 'primary' | 'secondary'
   selectOptions?: { value: string; label: string }[]
 }
 
 const SelectInput = forwardRef(
   (
-    { title, error, selectOptions, ...rest }: SelectInputProps,
+    { title, error, mode, selectOptions, ...rest }: SelectInputProps,
     ref: Ref<HTMLSelectElement>
   ) => {
     return (
-      <Input title={title} error={error}>
+      <Input title={title} error={error} mode={mode}>
         <select
           ref={ref}
           aria-label={title}
-          className="py-4 bg-transparent transition-all text-xl font-semibold border-b-2 border-border 
-    outline-none focus:border-primary focus:border-b-[3px]"
+          className={classnames(
+            'py-4 bg-transparent transition-all text-xl font-semibold border-b-2 border-border outline-none focus:border-primary focus:border-b-[3px]',
+            mode === 'secondary' && 'text-secondary focus:border-secondary'
+          )}
           {...rest}
         >
           <option></option>

@@ -9,6 +9,7 @@ module.exports = {
         border: '#7778B0',
         error: '#F13766',
         title: '#242565',
+        footer: '#0A075F',
       },
       backgroundImage: {
         'header-background': "url('./assets/header-background.webp')",

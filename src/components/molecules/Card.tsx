@@ -1,13 +1,20 @@
 import { format, parseISO } from 'date-fns'
 import { Link } from 'react-router-dom'
+import classnames from 'classnames'
 import { Event } from 'src/types/eventType'
 
+type Status = 'started' | 'completed' | 'paused'
 interface CardProps {
   event: Event
 }
 
+const StatusCardColor = {
+  started: 'bg-blue-700',
+  completed: 'bg-emerald-700',
+  paused: 'bg-yellow-600',
+}
+
 const Card = ({ event }: CardProps) => {
-  console.log('event.startDate', event)
   const date = parseISO(event.startDate)
   return (
     <Link
@@ -15,11 +22,23 @@ const Card = ({ event }: CardProps) => {
     rounded-3xl w-full lg:max-w-[400px] 2xl:max-w-[500px] bg-white cursor-pointer"
       to={`/events/update/${event.id}`}
     >
-      <img
-        src={event.imageUrl || require('src/assets/placeholder.webp')}
-        alt={`Image of ${event.title}`}
-        className="w-full h-[200px] object-cover rounded-t-3xl"
-      />
+      <div className="relative">
+        {event.status && (
+          <div
+            className={classnames(
+              'absolute right-5 top-5 py-1 px-4 rounded-lg shadow-md',
+              StatusCardColor[event.status as Status]
+            )}
+          >
+            <span className="text-secondary uppercase">{event.status}</span>
+          </div>
+        )}
+        <img
+          src={event.imageUrl || require('src/assets/placeholder.webp')}
+          alt={`Image of ${event.title}`}
+          className="w-full h-[200px] object-cover rounded-t-3xl"
+        />
+      </div>
       <div className="flex gap-6 px-6 py-8">
         <div className="flex flex-col text-center justify-between gap-4">
           <div className="flex flex-col">
