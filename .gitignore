@@ -45,4 +45,5 @@ yarn.lock
 
 # TypeScript configuration
 *.d.ts
+!src/custom.d.ts
 tsconfig.tsbuildinfo

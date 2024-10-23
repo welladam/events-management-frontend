@@ -67,7 +67,7 @@ const HomePage = () => {
       <div className="flex flex-col gap-8 py-10">
         {upcomingEvents.length > 0 && (
           <div className="flex flex-col gap-8 my-20">
-            <h1>Today&apos;s Event</h1>
+            <h1>The next event for you is...</h1>
             <Banner event={upcomingEvents[0]} />
           </div>
         )}
